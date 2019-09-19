@@ -15,6 +15,8 @@ public class TelService {
   public List<TelBean> findAllData() {
     List<Object[]> result = telRepository.findAllData();
     List<TelBean> beans = new ArrayList<>();
+
+    // List<Object[]>で取得した結果をList<TelBean>に詰め直す
     for (Object[] array : result) {
       TelBean bean = new TelBean();
       bean.setId(((BigInteger) array[0]).longValue());
