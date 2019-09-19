@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <title>demo</title>
+</head>
+
+<body>
+    <table>
+      <thead>
+        <tr>
+          <th>氏名</th>
+          <th>電話番号</th>
+          <th>メールアドレス</th>
+          <th>グループ名</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="item:${list}" th:object="${item}">
+          <td th:text="*{userName}"></td>
+          <td th:text="*{telNo}"></td>
+          <td th:text="*{mailAddr}"></td>
+          <td th:text="*{groupName}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
