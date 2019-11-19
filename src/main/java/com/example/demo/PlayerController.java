@@ -27,20 +27,24 @@ public class PlayerController {
 
   @GetMapping("update")
   public String update(Model model, @RequestParam Long id) {
-    PlayerData data = new PlayerData();
-    data.setId(id);
-    data.setName("update");
-    data.setAge(20);
-    playerService.update(data);
+    if (id != null) {
+      PlayerData data = new PlayerData();
+      data.setId(id);
+      data.setName("update");
+      data.setAge(20);
+      playerService.update(data);
+    }
     return "redirect:index";
   }
 
   @GetMapping("put")
   public String put(Model model, @RequestParam Long id) {
-    PlayerData data = new PlayerData();
-    data.setId(id);
-    data.setName("put");
-    playerService.put(data);
+    if (id != null) {
+      PlayerData data = playerService.findById(id);
+      data.setId(id);
+      data.setName("put");
+      playerService.put(data);
+    }
     return "redirect:index";
   }
 
