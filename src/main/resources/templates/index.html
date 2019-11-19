@@ -32,6 +32,7 @@
       <button id="save">Save</button>
       <button id="update">Update</button>
       <button id="put">Put</button>
+      <button id="save-or-update">Save or Update</button>
     </p>
     <script>
       document.querySelector("#save").addEventListener("click", function() {
@@ -43,6 +44,12 @@
       document.querySelector("#put").addEventListener("click", function() {
         location.href = "/put?id=" + document.querySelector("#id").value;
       });
+      document
+        .querySelector("#save-or-update")
+        .addEventListener("click", function() {
+          location.href =
+            "/save-or-update?id=" + document.querySelector("#id").value;
+        });
     </script>
   </body>
 </html>

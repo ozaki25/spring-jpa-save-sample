@@ -26,24 +26,45 @@ public class PlayerController {
   }
 
   @GetMapping("update")
-  public String update(Model model, @RequestParam Long id) {
+  public String update(Model model, @RequestParam(required = false) Long id) {
     if (id != null) {
-      PlayerData data = new PlayerData();
-      data.setId(id);
-      data.setName("update");
-      data.setAge(20);
-      playerService.update(data);
+      PlayerData data = playerService.findById(id);
+      if (data != null) {
+        data.setId(id);
+        data.setName("update");
+        data.setAge(20);
+        playerService.update(data);
+      }
     }
     return "redirect:index";
   }
 
   @GetMapping("put")
-  public String put(Model model, @RequestParam Long id) {
+  public String put(Model model, @RequestParam(required = false) Long id) {
     if (id != null) {
       PlayerData data = playerService.findById(id);
+      if (data == null) {
+        data = new PlayerData();
+      }
       data.setId(id);
       data.setName("put");
       playerService.put(data);
+    }
+    return "redirect:index";
+  }
+
+  @GetMapping("save-or-update")
+  public String saveOrUpdate(Model model, @RequestParam(required = false) Long id) {
+    if (id == null) {
+      PlayerData data = new PlayerData();
+      data.setName("save or update => save");
+      playerService.save(data);
+    } else {
+      PlayerData data = playerService.findById(id);
+      data.setId(id);
+      data.setName("save or update => update");
+      playerService.update(data);
+
     }
     return "redirect:index";
   }
