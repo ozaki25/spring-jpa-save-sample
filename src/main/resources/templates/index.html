@@ -1,31 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <title>demo</title>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <title>demo</title>
-</head>
-
-<body>
+  <body>
     <table>
       <thead>
         <tr>
-          <th>氏名</th>
-          <th>電話番号</th>
-          <th>メールアドレス</th>
-          <th>グループ名</th>
+          <th>ID</th>
+          <th>名前</th>
+          <th>年齢</th>
         </tr>
       </thead>
       <tbody>
         <tr th:each="item:${list}" th:object="${item}">
-          <td th:text="*{userName}"></td>
-          <td th:text="*{telNo}"></td>
-          <td th:text="*{mailAddr}"></td>
-          <td th:text="*{groupName}"></td>
+          <td th:text="*{id}"></td>
+          <td th:text="*{name}"></td>
+          <td th:text="*{age}"></td>
         </tr>
       </tbody>
     </table>
-  </div>
-</body>
-
+    <p>
+      <label>
+        ID:
+        <input type="number" id="id" />
+      </label>
+    </p>
+    <p>
+      <button id="save">Save</button>
+      <button id="update">Update</button>
+      <button id="put">Put</button>
+    </p>
+    <script>
+      document.querySelector("#save").addEventListener("click", function() {
+        location.href = "/save";
+      });
+      document.querySelector("#update").addEventListener("click", function() {
+        location.href = "/update?id=" + document.querySelector("#id").value;
+      });
+      document.querySelector("#put").addEventListener("click", function() {
+        location.href = "/put?id=" + document.querySelector("#id").value;
+      });
+    </script>
+  </body>
 </html>
