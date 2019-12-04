@@ -29,4 +29,8 @@ public class PlayerService {
   public void put(PlayerData playerData) {
     playerRepository.save(playerData);
   }
+
+  public int calc(int a, int b) {
+    return a + b;
+  }
 }
