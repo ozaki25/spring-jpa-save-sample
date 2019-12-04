@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +12,15 @@ public class PlayerData {
   private Long id;
   private String name;
   private int age;
+
+  public PlayerData() {
+  }
+
+  public PlayerData(Long id, String name, int age) {
+    this.id = id;
+    this.name = name;
+    this.age = age;
+  }
 
   public Long getId() {
     return id;
@@ -34,5 +44,25 @@ public class PlayerData {
 
   public int getAge() {
     return age;
+  }
+
+  @Override
+  public String toString() {
+    return "PlayerData{" + "id=" + id + ", name='" + name + '\'' + ", age=" + age + '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    PlayerData that = (PlayerData) o;
+    return age == that.age && Objects.equals(id, that.id) && Objects.equals(name, that.name);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, age);
   }
 }
