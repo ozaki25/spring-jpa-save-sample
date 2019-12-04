@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.*;
@@ -7,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PlayerController {
+  @Autowired
+  private PlayerRepository playerRepository;
+
   @Autowired
   private PlayerService playerService;
 
@@ -69,4 +74,23 @@ public class PlayerController {
     return "redirect:index";
   }
 
+  @ResponseBody
+  @GetMapping("/ids")
+  public List<PlayerData> ids(Model model) {
+    return playerRepository.findByIdIn(Arrays.asList(1L, 2L, 3L));
+  }
+
+  @ResponseBody
+  @GetMapping("/ids-and-names")
+  public List<PlayerData> idsAndNames(Model model) {
+    return playerRepository
+        .findByIdInAndNameIn(Arrays.asList(1L, 2L, 3L), Arrays.asList("save", "put"));
+  }
+
+
+  @ResponseBody
+  @GetMapping("/id-between-and-names")
+  public List<PlayerData> idBetweenAndNames(Model model) {
+    return playerRepository.findByIdBetweenAndNameIn(2L, 3L, Arrays.asList("save", "put"));
+  }
 }

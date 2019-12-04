@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ public class PlayerData {
   @Id
   @GeneratedValue
   private Long id;
+  @Column(name = "username")
   private String name;
   private int age;
 
